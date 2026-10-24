@@ -102,7 +102,8 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     if let command = menuItem.representedObject as? PlaylistRowsCommand {
-      return command.player != nil
+      guard let player = command.player else { return false }
+      return MosaicActions.canRun(.playlistRows(command.rows), player: player)
     }
     guard let command = Command(rawValue: menuItem.tag) else { return false }
     return MosaicActions.canRun(command.scope, player: PlayerCore.lastActive)
