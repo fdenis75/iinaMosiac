@@ -18,18 +18,16 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     case mosaicPlaylist
     case previewCurrent
     case previewPlaylist
+    case playPreview
 
-    var kind: MosaicJobKind {
+    /// The job a generate command starts; `nil` for Play Preview.
+    var job: (kind: MosaicJobKind, scope: MosaicActions.Scope)? {
       switch self {
-      case .mosaicCurrent, .mosaicPlaylist: return .mosaic
-      case .previewCurrent, .previewPlaylist: return .preview
-      }
-    }
-
-    var scope: MosaicActions.Scope {
-      switch self {
-      case .mosaicCurrent, .previewCurrent: return .currentFile
-      case .mosaicPlaylist, .previewPlaylist: return .playlist
+      case .mosaicCurrent: return (.mosaic, .currentFile)
+      case .mosaicPlaylist: return (.mosaic, .playlist)
+      case .previewCurrent: return (.preview, .currentFile)
+      case .previewPlaylist: return (.preview, .playlist)
+      case .playPreview: return nil
       }
     }
   }
@@ -42,6 +40,7 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     menu.addItem(.separator())
     addItem(to: menu, title: "Generate Preview of Current Video", command: .previewCurrent)
     addItem(to: menu, title: "Generate Previews for Playlist", command: .previewPlaylist)
+    addItem(to: menu, title: "Play Preview of Current Video", command: .playPreview)
 
     let item = NSMenuItem(title: "Mosaic", action: nil, keyEquivalent: "")
     item.submenu = menu
@@ -73,7 +72,39 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
       item.representedObject = PlaylistRowsCommand(kind: kind, rows: rows, player: player)
       items.append(item)
     }
+    if rows.count == 1, let row = rows.first, let preview = previewOfRow(row, of: player) {
+      let item = NSMenuItem(title: "Play Preview", action: #selector(performPlayPreview(_:)), keyEquivalent: "")
+      item.target = self
+      item.representedObject = PlayPreviewCommand(preview: preview, player: player)
+      items.append(item)
+    }
     return items
+  }
+
+  /// The preview generated in this session for a local file at `row` of `player`'s playlist.
+  private func previewOfRow(_ row: Int, of player: PlayerCore) -> URL? {
+    let filename: String? = player.info.$playlist.withLock { playlist in
+      guard row < playlist.count, !playlist[row].isNetworkResource else { return nil }
+      return playlist[row].filename
+    }
+    guard let filename else { return nil }
+    return MosaicJobCenter.shared.latestPreview(for: URL(fileURLWithPath: filename))
+  }
+
+  /// A preview to play from the playlist context menu.
+  private final class PlayPreviewCommand {
+    let preview: URL
+    weak var player: PlayerCore?
+
+    init(preview: URL, player: PlayerCore) {
+      self.preview = preview
+      self.player = player
+    }
+  }
+
+  @objc private func performPlayPreview(_ sender: NSMenuItem) {
+    guard let command = sender.representedObject as? PlayPreviewCommand else { return }
+    MosaicActions.playPreview(command.preview, pausing: command.player)
   }
 
   /// What a playlist context-menu item works on.
@@ -97,7 +128,11 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
 
   @objc private func performCommand(_ sender: NSMenuItem) {
     guard let command = Command(rawValue: sender.tag) else { return }
-    MosaicActions.generate(command.kind, for: command.scope, player: PlayerCore.lastActive)
+    if let job = command.job {
+      MosaicActions.generate(job.kind, for: job.scope, player: PlayerCore.lastActive)
+    } else {
+      MosaicActions.playPreviewOfCurrentFile(of: PlayerCore.lastActive)
+    }
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
@@ -105,7 +140,13 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
       guard let player = command.player else { return false }
       return MosaicActions.canRun(.playlistRows(command.rows), player: player)
     }
+    if menuItem.representedObject is PlayPreviewCommand {
+      return true
+    }
     guard let command = Command(rawValue: menuItem.tag) else { return false }
-    return MosaicActions.canRun(command.scope, player: PlayerCore.lastActive)
+    guard let job = command.job else {
+      return MosaicActions.previewOfCurrentFile(of: PlayerCore.lastActive) != nil
+    }
+    return MosaicActions.canRun(job.scope, player: PlayerCore.lastActive)
   }
 }

@@ -210,7 +210,7 @@ exist. Phase 3 still adds the playlist sidebar context menu; phase 4 adds "Play 
   `generateMosaicsforbatch`, skipped-files summary (OSD "12 mosaics, 3 skipped" with details in
   the jobs window).
 
-**Status:** in review. The playlist sidebar's right-click menu gets a "Mosaic" section with
+**Status:** done (#5). The playlist sidebar's right-click menu gets a "Mosaic" section with
 "Generate Mosaic(s)" and "Generate Preview(s)" for the clicked or selected rows
 (`MosaicActions.Scope.playlistRows`, `MosaicMenu.playlistContextMenuItems`). Network rows are
 skipped, and the section is disabled when every target row is a network resource. The command,
@@ -219,6 +219,13 @@ the menu item and the batch summary OSD shipped in phase 2.
 ### Phase 4: previews (current and playlist)
 - `PreviewGeneratorCoordinator`, `preview-current` / `preview-playlist`, context-menu entries,
   `enableAppLifecycleMonitor = false`, "Play preview" action.
+
+**Status:** in review. Generating previews shipped in phases 1–3; this phase adds "Play preview".
+File ▸ Mosaic ▸ Play Preview of Current Video (and the `play-preview` key-binding command) opens
+the latest preview generated this session for the current video in a new player window and
+pauses the original. The playlist context menu shows "Play Preview" when a single row with a
+preview is targeted. Lookup is session-only (`MosaicJobCenter.latestPreview(for:)`); previews
+from earlier sessions are not found until the jobs window or a persisted index exists.
 
 ### Phase 5: jobs window
 - SwiftUI list hosted in `MosaicJobsWindowController`; Window menu entry and `mosaic-jobs`
