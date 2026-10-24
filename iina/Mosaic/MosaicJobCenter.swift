@@ -106,6 +106,20 @@ final class MosaicJobCenter {
     }
   }
 
+  /// The most recent preview generated in this session for the video at `source`, if its file
+  /// still exists.
+  func latestPreview(for source: URL) -> URL? {
+    let source = source.standardizedFileURL
+    for job in jobs.reversed() where job.kind == .preview {
+      for item in job.items where item.url.standardizedFileURL == source {
+        if case .done(let output) = item.state, FileManager.default.fileExists(atPath: output.path) {
+          return output
+        }
+      }
+    }
+    return nil
+  }
+
   // MARK: - Running a job
 
   private func run(_ job: MosaicJob) async {

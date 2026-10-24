@@ -731,6 +731,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       MainActor.assumeIsolated {
         MosaicActions.generate(kind, for: scope, player: player)
       }
+    case .playPreview:
+      MainActor.assumeIsolated {
+        MosaicActions.playPreviewOfCurrentFile(of: player)
+      }
     default:
       break
     }

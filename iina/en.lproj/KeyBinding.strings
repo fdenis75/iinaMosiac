@@ -61,6 +61,7 @@
 "iina.mosaic-playlist" = "Generate mosaics for playlist";
 "iina.preview-current" = "Generate preview of current video";
 "iina.preview-playlist" = "Generate previews for playlist";
+"iina.play-preview" = "Play preview of current video";
 
 "yes" = "Yes";
 "no" = "No";

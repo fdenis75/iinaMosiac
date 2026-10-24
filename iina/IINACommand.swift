@@ -43,5 +43,6 @@ enum IINACommand: String {
   case mosaicPlaylist = "mosaic-playlist"
   case previewCurrent = "preview-current"
   case previewPlaylist = "preview-playlist"
+  case playPreview = "play-preview"
 
 }
