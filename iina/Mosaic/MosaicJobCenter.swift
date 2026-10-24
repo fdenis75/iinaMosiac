@@ -15,7 +15,10 @@ final class MosaicJobCenter {
   static let shared = MosaicJobCenter()
 
   /// Posted on the main thread whenever a job or one of its files changes state or progress.
-  static let didChangeNotification = Notification.Name("IINAMosaicJobCenterDidChange")
+  nonisolated static let didChangeNotification = Notification.Name("IINAMosaicJobCenterDidChange")
+
+  /// Posted on the main thread when the last outstanding job task returns.
+  nonisolated static let allTasksFinishedNotification = Notification.Name("IINAMosaicJobCenterAllTasksFinished")
 
   var settings = MosaicSettings()
 
@@ -23,6 +26,12 @@ final class MosaicJobCenter {
   private(set) var jobs: [MosaicJob] = []
 
   var hasActiveJobs: Bool { jobs.contains { $0.isActive } }
+
+  /// `true` while a job task has not returned, including a cancelled one that is still stopping
+  /// MosaicKit's work. App termination waits for this to become `false`.
+  var hasOutstandingTasks: Bool { outstandingTaskCount > 0 }
+
+  private var outstandingTaskCount = 0
 
   private var mosaicCoordinator: MosaicGeneratorCoordinator<MetalMosaicGenerator>?
   private var previewCoordinator: PreviewGeneratorCoordinator?
@@ -52,10 +61,12 @@ final class MosaicJobCenter {
     jobs.append(job)
     log("Queued \(kind) job \(job.id) with \(items.count) file(s)")
 
+    outstandingTaskCount += 1
     job.task = Task(priority: .utility) {
       await previous?.value
       await self.run(job)
       onFinish?(job)
+      self.taskDidReturn()
     }
     notifyChange()
     return job
@@ -85,6 +96,13 @@ final class MosaicJobCenter {
   func cancelAll() {
     for job in jobs where job.isActive {
       cancel(job)
+    }
+  }
+
+  private func taskDidReturn() {
+    outstandingTaskCount -= 1
+    if outstandingTaskCount == 0 {
+      NotificationCenter.default.post(name: Self.allTasksFinishedNotification, object: self)
     }
   }
 
