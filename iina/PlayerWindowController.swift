@@ -735,6 +735,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       MainActor.assumeIsolated {
         MosaicActions.playPreviewOfCurrentFile(of: player)
       }
+    case .mosaicJobs:
+      MainActor.assumeIsolated {
+        MosaicActions.showJobs()
+      }
     default:
       break
     }

@@ -36,6 +36,11 @@ enum MosaicActions {
     }
   }
 
+  /// Shows the Mosaic Jobs window.
+  static func showJobs() {
+    MosaicJobsWindowController.shared.show()
+  }
+
   /// The preview generated in this session for the file playing in `player`, if any.
   static func previewOfCurrentFile(of player: PlayerCore) -> URL? {
     guard let url = player.info.currentURL, url.isFileURL else { return nil }
@@ -79,11 +84,12 @@ enum MosaicActions {
 
     let noun = kind == .mosaic ? "mosaic" : "preview"
     let count = candidates.filter { $0.skipReason == nil }.count
-    player.sendOSD(.custom(count > 1 ? "Generating \(count) \(noun)s…" : "Generating \(noun)…"))
+    player.sendOSD(.customWithDetail(count > 1 ? "Generating \(count) \(noun)s…" : "Generating \(noun)…",
+                                     "Window ▸ Mosaic Jobs shows the progress"))
 
     MosaicJobCenter.shared.start(kind, candidates: candidates, player: player) { job in
-      // Until the jobs window exists (phase 5), show the results in Finder. A preview of the
-      // current video is ready to play from File ▸ Mosaic ▸ Play Preview of Current Video.
+      // Until the mosaicOnFinish setting exists (phase 6), show the results in Finder. They are
+      // also listed in the Mosaic Jobs window, with Open and Play Preview actions.
       let outputs = job.outputs
       if !outputs.isEmpty {
         NSWorkspace.shared.activateFileViewerSelecting(outputs)

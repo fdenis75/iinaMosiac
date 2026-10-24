@@ -99,6 +99,12 @@ final class MosaicJobCenter {
     }
   }
 
+  /// Removes finished and cancelled jobs from the list (the Mosaic Jobs window's Clear Finished).
+  func removeFinishedJobs() {
+    jobs.removeAll { !$0.isActive }
+    notifyChange()
+  }
+
   private func taskDidReturn() {
     outstandingTaskCount -= 1
     if outstandingTaskCount == 0 {
