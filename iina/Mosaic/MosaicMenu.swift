@@ -55,12 +55,55 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     menu.addItem(item)
   }
 
+  /// The "Mosaic" section of the playlist sidebar's context menu, for the clicked or selected
+  /// `rows` of `player`'s playlist. Empty when none of the rows is a local file.
+  func playlistContextMenuItems(for rows: IndexSet, of player: PlayerCore) -> [NSMenuItem] {
+    let scope = MosaicActions.Scope.playlistRows(rows)
+    guard MosaicActions.canRun(scope, player: player) else { return [] }
+    let plural = rows.count > 1
+    var items: [NSMenuItem] = []
+    if #available(macOS 14.0, *) {
+      items.append(.sectionHeader(title: "Mosaic"))
+    }
+    for kind in [MosaicJobKind.mosaic, .preview] {
+      let noun = kind == .mosaic ? "Mosaic" : "Preview"
+      let item = NSMenuItem(title: "Generate \(noun)\(plural ? "s" : "")",
+                            action: #selector(performPlaylistRowsCommand(_:)), keyEquivalent: "")
+      item.target = self
+      item.representedObject = PlaylistRowsCommand(kind: kind, rows: rows, player: player)
+      items.append(item)
+    }
+    return items
+  }
+
+  /// What a playlist context-menu item works on.
+  private final class PlaylistRowsCommand {
+    let kind: MosaicJobKind
+    let rows: IndexSet
+    weak var player: PlayerCore?
+
+    init(kind: MosaicJobKind, rows: IndexSet, player: PlayerCore) {
+      self.kind = kind
+      self.rows = rows
+      self.player = player
+    }
+  }
+
+  @objc private func performPlaylistRowsCommand(_ sender: NSMenuItem) {
+    guard let command = sender.representedObject as? PlaylistRowsCommand,
+          let player = command.player else { return }
+    MosaicActions.generate(command.kind, for: .playlistRows(command.rows), player: player)
+  }
+
   @objc private func performCommand(_ sender: NSMenuItem) {
     guard let command = Command(rawValue: sender.tag) else { return }
     MosaicActions.generate(command.kind, for: command.scope, player: PlayerCore.lastActive)
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if let command = menuItem.representedObject as? PlaylistRowsCommand {
+      return command.player != nil
+    }
     guard let command = Command(rawValue: menuItem.tag) else { return false }
     return MosaicActions.canRun(command.scope, player: PlayerCore.lastActive)
   }

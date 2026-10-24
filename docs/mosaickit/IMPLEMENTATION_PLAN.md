@@ -198,7 +198,7 @@ from Xcode.
 - `MosaicMenuBuilder` submenu (Generate Mosaic, plus disabled placeholders for the rest),
   `mosaic-current` command, OSD start/finish/fail, Reveal/Open action per `mosaicOnFinish`.
 
-**Status:** in review. Since the phase 1 service already handled playlists and previews, the
+**Status:** done (#4). Since the phase 1 service already handled playlists and previews, the
 submenu (`MosaicMenu`, File ▸ Mosaic) enables all four commands at once: mosaic or preview, of the
 current video or of the playlist, plus the `mosaic-current`, `mosaic-playlist`,
 `preview-current` and `preview-playlist` key-binding commands (`MosaicActions`). Results are
@@ -209,6 +209,12 @@ exist. Phase 3 still adds the playlist sidebar context menu; phase 4 adds "Play 
 - `mosaic-playlist` command and menu item, playlist sidebar context-menu section, batch via
   `generateMosaicsforbatch`, skipped-files summary (OSD "12 mosaics, 3 skipped" with details in
   the jobs window).
+
+**Status:** in review. The playlist sidebar's right-click menu gets a "Mosaic" section with
+"Generate Mosaic(s)" and "Generate Preview(s)" for the clicked or selected rows
+(`MosaicActions.Scope.playlistRows`, `MosaicMenu.playlistContextMenuItems`). Network rows are
+skipped, and the section is disabled when every target row is a network resource. The command,
+the menu item and the batch summary OSD shipped in phase 2.
 
 ### Phase 4: previews (current and playlist)
 - `PreviewGeneratorCoordinator`, `preview-current` / `preview-playlist`, context-menu entries,
