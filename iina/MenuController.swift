@@ -233,7 +233,9 @@ class MenuController: NSObject, NSMenuDelegate {
     // iinaMosaic: phase 0 entry point, replaced by the Mosaic submenu in phase 2.
     if let fileMenu = showCurrentFileInFinder.menu {
       let index = fileMenu.index(of: showCurrentFileInFinder)
-      fileMenu.insertItem(MosaicDebugAction.shared.makeMenuItem(), at: index + 1)
+      // bindMenuItems() runs on the main thread at launch but is not main-actor isolated.
+      let item = MainActor.assumeIsolated { MosaicDebugAction.shared.makeMenuItem() }
+      fileMenu.insertItem(item, at: index + 1)
     }
 
     if Preference.bool(for: .enableCmdN) {
