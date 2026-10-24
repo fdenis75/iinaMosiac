@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */; };
+		1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */; };
+		1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */; };
+		1A0C05B82F9D000100A1B2C3 /* MosaicJobCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B72F9D000100A1B2C3 /* MosaicJobCenter.swift */; };
 		1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */; };
 		1A0C05A62F9D000100A1B2C3 /* MosaicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0C05A52F9D000100A1B2C3 /* MosaicKit */; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
@@ -536,6 +540,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJob.swift; sourceTree = "<group>"; };
+		1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicInputResolver.swift; sourceTree = "<group>"; };
+		1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicSettings.swift; sourceTree = "<group>"; };
+		1A0C05B72F9D000100A1B2C3 /* MosaicJobCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJobCenter.swift; sourceTree = "<group>"; };
 		1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicDebugAction.swift; sourceTree = "<group>"; };
 		0507C25E2B5617650043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		0507C25F2B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1915,6 +1923,10 @@
 			isa = PBXGroup;
 			children = (
 				1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */,
+				1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */,
+				1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */,
+				1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */,
+				1A0C05B72F9D000100A1B2C3 /* MosaicJobCenter.swift */,
 			);
 			path = Mosaic;
 			sourceTree = "<group>";
@@ -2922,6 +2934,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */,
+				1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */,
+				1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */,
+				1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */,
+				1A0C05B82F9D000100A1B2C3 /* MosaicJobCenter.swift in Sources */,
 				E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */,
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,

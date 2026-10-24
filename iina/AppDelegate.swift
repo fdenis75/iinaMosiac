@@ -508,6 +508,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // Disable all remote media commands. This also removes IINA from the Now Playing widget.
     RemoteCommandController.shared.disable()
 
+    // iinaMosaic: stop mosaic and preview generation. MosaicKit leaves no partial files.
+    MainActor.assumeIsolated { MosaicJobCenter.shared.cancelAll() }
+
     // The first priority was to shutdown any new input from the user. The second priority is to
     // send a logout request if logged into an online subtitles provider as that needs time to
     // complete.
