@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1A0C05C22F9D000100A1B2C3 /* MosaicActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */; };
+		1A0C05D22F9D000100A1B2C3 /* MosaicJobsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05D12F9D000100A1B2C3 /* MosaicJobsWindowController.swift */; };
+		1A0C05D42F9D000100A1B2C3 /* MosaicJobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05D32F9D000100A1B2C3 /* MosaicJobsView.swift */; };
 		1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */; };
 		1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */; };
 		1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */; };
@@ -542,6 +544,8 @@
 
 /* Begin PBXFileReference section */
 		1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicActions.swift; sourceTree = "<group>"; };
+		1A0C05D12F9D000100A1B2C3 /* MosaicJobsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJobsWindowController.swift; sourceTree = "<group>"; };
+		1A0C05D32F9D000100A1B2C3 /* MosaicJobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJobsView.swift; sourceTree = "<group>"; };
 		1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJob.swift; sourceTree = "<group>"; };
 		1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicInputResolver.swift; sourceTree = "<group>"; };
 		1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicSettings.swift; sourceTree = "<group>"; };
@@ -1926,6 +1930,8 @@
 			children = (
 				1A0C05A12F9D000100A1B2C3 /* MosaicMenu.swift */,
 				1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */,
+				1A0C05D12F9D000100A1B2C3 /* MosaicJobsWindowController.swift */,
+				1A0C05D32F9D000100A1B2C3 /* MosaicJobsView.swift */,
 				1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */,
 				1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */,
 				1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */,
@@ -2938,6 +2944,8 @@
 			files = (
 				1A0C05A22F9D000100A1B2C3 /* MosaicMenu.swift in Sources */,
 				1A0C05C22F9D000100A1B2C3 /* MosaicActions.swift in Sources */,
+				1A0C05D22F9D000100A1B2C3 /* MosaicJobsWindowController.swift in Sources */,
+				1A0C05D42F9D000100A1B2C3 /* MosaicJobsView.swift in Sources */,
 				1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */,
 				1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */,
 				1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */,

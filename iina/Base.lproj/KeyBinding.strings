@@ -62,6 +62,7 @@
 "iina.preview-current" = "Generate preview of current video";
 "iina.preview-playlist" = "Generate previews for playlist";
 "iina.play-preview" = "Play preview of current video";
+"iina.mosaic-jobs" = "Show mosaic jobs";
 
 "yes" = "Yes";
 "no" = "No";

@@ -438,6 +438,13 @@ class MenuController: NSObject, NSMenuDelegate {
     customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
 
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
+    // iinaMosaic: Window ▸ Mosaic Jobs, after Inspector.
+    if let windowMenu = inspector.menu {
+      let index = windowMenu.index(of: inspector)
+      MainActor.assumeIsolated {
+        windowMenu.insertItem(MosaicMenu.shared.makeWindowMenuItem(), at: index + 1)
+      }
+    }
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
 
     // Help

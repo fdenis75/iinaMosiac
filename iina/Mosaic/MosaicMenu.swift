@@ -19,15 +19,16 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     case previewCurrent
     case previewPlaylist
     case playPreview
+    case showJobs
 
-    /// The job a generate command starts; `nil` for Play Preview.
+    /// The job a generate command starts; `nil` for the other commands.
     var job: (kind: MosaicJobKind, scope: MosaicActions.Scope)? {
       switch self {
       case .mosaicCurrent: return (.mosaic, .currentFile)
       case .mosaicPlaylist: return (.mosaic, .playlist)
       case .previewCurrent: return (.preview, .currentFile)
       case .previewPlaylist: return (.preview, .playlist)
-      case .playPreview: return nil
+      case .playPreview, .showJobs: return nil
       }
     }
   }
@@ -41,9 +42,19 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     addItem(to: menu, title: "Generate Preview of Current Video", command: .previewCurrent)
     addItem(to: menu, title: "Generate Previews for Playlist", command: .previewPlaylist)
     addItem(to: menu, title: "Play Preview of Current Video", command: .playPreview)
+    menu.addItem(.separator())
+    addItem(to: menu, title: "Show Mosaic Jobs", command: .showJobs)
 
     let item = NSMenuItem(title: "Mosaic", action: nil, keyEquivalent: "")
     item.submenu = menu
+    return item
+  }
+
+  /// The "Mosaic Jobs" item to insert into the Window menu.
+  func makeWindowMenuItem() -> NSMenuItem {
+    let item = NSMenuItem(title: "Mosaic Jobs", action: #selector(performCommand(_:)), keyEquivalent: "")
+    item.target = self
+    item.tag = Command.showJobs.rawValue
     return item
   }
 
@@ -130,6 +141,8 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
     guard let command = Command(rawValue: sender.tag) else { return }
     if let job = command.job {
       MosaicActions.generate(job.kind, for: job.scope, player: PlayerCore.lastActive)
+    } else if command == .showJobs {
+      MosaicActions.showJobs()
     } else {
       MosaicActions.playPreviewOfCurrentFile(of: PlayerCore.lastActive)
     }
@@ -144,6 +157,9 @@ final class MosaicMenu: NSObject, NSMenuItemValidation {
       return true
     }
     guard let command = Command(rawValue: menuItem.tag) else { return false }
+    if command == .showJobs {
+      return true
+    }
     guard let job = command.job else {
       return MosaicActions.previewOfCurrentFile(of: PlayerCore.lastActive) != nil
     }

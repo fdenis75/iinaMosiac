@@ -70,6 +70,7 @@ class KeyBindingDataLoader {
     KBI("preview-current", type: .iinaCmd),
     KBI("preview-playlist", type: .iinaCmd),
     KBI("play-preview", type: .iinaCmd),
+    KBI("mosaic-jobs", type: .iinaCmd),
     KBI.separator(),
     KBI("write-watch-later-config"),
     KBI("stop"),

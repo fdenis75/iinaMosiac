@@ -220,7 +220,7 @@ the menu item and the batch summary OSD shipped in phase 2.
 - `PreviewGeneratorCoordinator`, `preview-current` / `preview-playlist`, context-menu entries,
   `enableAppLifecycleMonitor = false`, "Play preview" action.
 
-**Status:** in review. Generating previews shipped in phases 1–3; this phase adds "Play preview".
+**Status:** done (#6). Generating previews shipped in phases 1–3; this phase adds "Play preview".
 File ▸ Mosaic ▸ Play Preview of Current Video (and the `play-preview` key-binding command) opens
 the latest preview generated this session for the current video in a new player window and
 pauses the original. The playlist context menu shows "Play Preview" when a single row with a
@@ -231,6 +231,13 @@ from earlier sessions are not found until the jobs window or a persisted index e
 - SwiftUI list hosted in `MosaicJobsWindowController`; Window menu entry and `mosaic-jobs`
   command; per-job and global cancel; per-file status, progress and errors.
 - Optional: a small progress indicator in the playlist sidebar header while a job runs.
+
+**Status:** in review. `MosaicJobsWindowController` hosts the SwiftUI `MosaicJobsView`, newest job
+first: per-file state, progress bar and error, per-job Cancel, Cancel All, Clear Finished, and per
+file Open (mosaic) or Play Preview (preview), Show in Finder, Copy Path and Copy Message. It opens
+from Window ▸ Mosaic Jobs, File ▸ Mosaic ▸ Show Mosaic Jobs and the `mosaic-jobs` command; the
+start OSD points to it. The window is not opened automatically, and results are still revealed in
+Finder until `mosaicOnFinish` (phase 6). The sidebar progress indicator is not done.
 
 ### Phase 6: settings page
 - `SettingsPageMosaic` with the section 2.4 options, `Preference` keys and defaults, and the
