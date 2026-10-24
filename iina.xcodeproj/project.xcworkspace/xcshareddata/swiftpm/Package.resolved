@@ -2,6 +2,15 @@
   "originHash" : "d47d2b54d2074afccd9ca72634b96746ca680420a7d0af58b7115304c3df68e4",
   "pins" : [
     {
+      "identity" : "dominantcolors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DenDmitriev/DominantColors.git",
+      "state" : {
+        "revision" : "a05327d36092c47e9ddc77ce565eb35a5b4a4a6e",
+        "version" : "1.2.2"
+      }
+    },
+    {
       "identity" : "grmustache.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/GRMustache.swift",
@@ -20,6 +29,24 @@
       }
     },
     {
+      "identity" : "libwebp-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/awxkee/libwebp-ios.git",
+      "state" : {
+        "revision" : "09ab26afc64c55a49332c396c4b465c278fcb05f",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "mosaickit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fdenis75/MosaicKit",
+      "state" : {
+        "revision" : "0b5af024e646cf8923e34082cabc1a1469cd31d7",
+        "version" : "1.13.0"
+      }
+    },
+    {
       "identity" : "promisekit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mxcl/PromiseKit",
@@ -29,12 +56,30 @@
       }
     },
     {
+      "identity" : "sjsassetexportsession",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/samsonjs/SJSAssetExportSession.git",
+      "state" : {
+        "revision" : "c77c3cacd7373704dc0e69927ac2aac023904418",
+        "version" : "0.4.0"
+      }
+    },
+    {
       "identity" : "sparkle",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle/",
       "state" : {
         "revision" : "ac2def288cbff5cfc7df3ffef6abdf45b72bcb0a",
         "version" : "2.9.6"
+      }
+    },
+    {
+      "identity" : "webp.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/awxkee/webp.swift.git",
+      "state" : {
+        "revision" : "10562e79e338de46e70f0f5c67b24cb90e02adb2",
+        "version" : "1.1.2"
       }
     }
   ],
