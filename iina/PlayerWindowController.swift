@@ -724,6 +724,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+    // iinaMosaic
+    case .mosaicCurrent, .mosaicPlaylist, .previewCurrent, .previewPlaylist:
+      let kind: MosaicJobKind = (cmd == .mosaicCurrent || cmd == .mosaicPlaylist) ? .mosaic : .preview
+      let scope: MosaicActions.Scope = (cmd == .mosaicCurrent || cmd == .previewCurrent) ? .currentFile : .playlist
+      MainActor.assumeIsolated {
+        MosaicActions.generate(kind, for: scope, player: player)
+      }
     default:
       break
     }

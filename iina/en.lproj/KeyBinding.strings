@@ -57,6 +57,10 @@
 "iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
 "iina.find-online-subs" = "Find online subtitles";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
+"iina.mosaic-current" = "Generate mosaic of current video";
+"iina.mosaic-playlist" = "Generate mosaics for playlist";
+"iina.preview-current" = "Generate preview of current video";
+"iina.preview-playlist" = "Generate previews for playlist";
 
 "yes" = "Yes";
 "no" = "No";
