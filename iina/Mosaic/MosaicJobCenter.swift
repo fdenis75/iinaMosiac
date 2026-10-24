@@ -33,6 +33,10 @@ final class MosaicJobCenter {
 
   private var outstandingTaskCount = 0
 
+  /// Source video → preview, for jobs removed by `removeFinishedJobs()`, so Play Preview still
+  /// finds their previews.
+  private var clearedPreviews: [URL: URL] = [:]
+
   private var mosaicCoordinator: MosaicGeneratorCoordinator<MetalMosaicGenerator>?
   private var previewCoordinator: PreviewGeneratorCoordinator?
 
@@ -101,6 +105,14 @@ final class MosaicJobCenter {
 
   /// Removes finished and cancelled jobs from the list (the Mosaic Jobs window's Clear Finished).
   func removeFinishedJobs() {
+    // Oldest first, so the newest preview of a video wins.
+    for job in jobs where !job.isActive && job.kind == .preview {
+      for item in job.items {
+        if case .done(let output) = item.state {
+          clearedPreviews[item.url.standardizedFileURL] = output
+        }
+      }
+    }
     jobs.removeAll { !$0.isActive }
     notifyChange()
   }
@@ -122,6 +134,9 @@ final class MosaicJobCenter {
           return output
         }
       }
+    }
+    if let output = clearedPreviews[source], FileManager.default.fileExists(atPath: output.path) {
+      return output
     }
     return nil
   }
