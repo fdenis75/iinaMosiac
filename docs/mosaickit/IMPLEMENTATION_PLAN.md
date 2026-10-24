@@ -44,7 +44,7 @@ MosaicKit `main` at `0b5af02` (release 1.13.0).
 
 ### 1.3 Consequences
 
-1. **Deployment target.** iinaMosaic must move to macOS 26 to link MosaicKit (decision D1). It
+1. **Deployment target.** iinaMosaic must move to macOS 26 to link MosaicKit (decision D1, decided: yes). It
    is the smallest change and the fork is personal; upstream IINA keeps supporting 12. The
    alternatives are worse: an embedded framework at 26 weak-linked from a 12 app needs
    `@available` everywhere and still only works on 26; a JS plugin driving an external CLI (for
@@ -257,7 +257,7 @@ There is no test target in IINA today. Plan:
 
 | ID | Question | Recommendation |
 |---|---|---|
-| D1 | Raise iinaMosaic's deployment target to macOS 26 to link MosaicKit? | **Yes.** Personal fork; MosaicKit cannot go lower; the alternatives (weak-linked framework, JS plugin + CLI) cost more and still need macOS 26 for the feature. |
+| D1 | Raise iinaMosaic's deployment target to macOS 26 to link MosaicKit? | **Decided 2026-10-24: yes** (François). Personal fork; MosaicKit cannot go lower; the alternatives (weak-linked framework, JS plugin + CLI) cost more and still need macOS 26 for the feature. |
 | D2 | Default output location | Next to the video (MosaicKit's default, matches Tessera), with a custom-folder option. |
 | D3 | Menu placement | A "Mosaic" submenu in the File menu (near Save Playlist / Show in Finder); revisit a top-level menu if it grows. |
 | D4 | WebP in v1 | No; offer HEIF/JPEG/PNG and GIF/HEICS animations. Linking `MosaicKitWebP` later is one line plus `register()`. |
