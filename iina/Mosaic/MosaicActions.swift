@@ -55,7 +55,9 @@ enum MosaicActions {
   /// Plays `preview` in a new player window and pauses `player`.
   static func playPreview(_ preview: URL, pausing player: PlayerCore?) {
     player?.pause()
-    PlayerCore.newPlayerCore.openURL(preview)
+    // No folder autoload: previews sit beside their source videos, which would otherwise be
+    // added to the playlist and play after the preview.
+    PlayerCore.newPlayerCore.openURL(preview, shouldAutoLoad: false)
   }
 
   /// Starts a mosaic or preview job for the current file or the playlist of `player`.
