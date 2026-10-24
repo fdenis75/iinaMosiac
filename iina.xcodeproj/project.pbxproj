@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0C05C22F9D000100A1B2C3 /* MosaicActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */; };
 		1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */; };
 		1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */; };
 		1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */; };
 		1A0C05B82F9D000100A1B2C3 /* MosaicJobCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05B72F9D000100A1B2C3 /* MosaicJobCenter.swift */; };
-		1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */; };
+		1A0C05A22F9D000100A1B2C3 /* MosaicMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05A12F9D000100A1B2C3 /* MosaicMenu.swift */; };
 		1A0C05A62F9D000100A1B2C3 /* MosaicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0C05A52F9D000100A1B2C3 /* MosaicKit */; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
@@ -540,11 +541,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicActions.swift; sourceTree = "<group>"; };
 		1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJob.swift; sourceTree = "<group>"; };
 		1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicInputResolver.swift; sourceTree = "<group>"; };
 		1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicSettings.swift; sourceTree = "<group>"; };
 		1A0C05B72F9D000100A1B2C3 /* MosaicJobCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicJobCenter.swift; sourceTree = "<group>"; };
-		1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicDebugAction.swift; sourceTree = "<group>"; };
+		1A0C05A12F9D000100A1B2C3 /* MosaicMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicMenu.swift; sourceTree = "<group>"; };
 		0507C25E2B5617650043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		0507C25F2B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		0507C2622B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
@@ -1922,7 +1924,8 @@
 		1A0C05A32F9D000100A1B2C3 /* Mosaic */ = {
 			isa = PBXGroup;
 			children = (
-				1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */,
+				1A0C05A12F9D000100A1B2C3 /* MosaicMenu.swift */,
+				1A0C05C12F9D000100A1B2C3 /* MosaicActions.swift */,
 				1A0C05B12F9D000100A1B2C3 /* MosaicJob.swift */,
 				1A0C05B32F9D000100A1B2C3 /* MosaicInputResolver.swift */,
 				1A0C05B52F9D000100A1B2C3 /* MosaicSettings.swift */,
@@ -2933,7 +2936,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */,
+				1A0C05A22F9D000100A1B2C3 /* MosaicMenu.swift in Sources */,
+				1A0C05C22F9D000100A1B2C3 /* MosaicActions.swift in Sources */,
 				1A0C05B22F9D000100A1B2C3 /* MosaicJob.swift in Sources */,
 				1A0C05B42F9D000100A1B2C3 /* MosaicInputResolver.swift in Sources */,
 				1A0C05B62F9D000100A1B2C3 /* MosaicSettings.swift in Sources */,

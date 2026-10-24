@@ -64,6 +64,12 @@ class KeyBindingDataLoader {
     KBI("find-online-subs", type: .iinaCmd),
     KBI("save-downloaded-sub", type: .iinaCmd),
     KBI.separator(),
+    // iinaMosaic
+    KBI("mosaic-current", type: .iinaCmd),
+    KBI("mosaic-playlist", type: .iinaCmd),
+    KBI("preview-current", type: .iinaCmd),
+    KBI("preview-playlist", type: .iinaCmd),
+    KBI.separator(),
     KBI("write-watch-later-config"),
     KBI("stop"),
     KBI("quit")

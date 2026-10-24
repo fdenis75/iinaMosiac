@@ -38,4 +38,10 @@ enum IINACommand: String {
   case findOnlineSubs = "find-online-subs"
   case saveDownloadedSub = "save-downloaded-sub"
 
+  // iinaMosaic
+  case mosaicCurrent = "mosaic-current"
+  case mosaicPlaylist = "mosaic-playlist"
+  case previewCurrent = "preview-current"
+  case previewPlaylist = "preview-playlist"
+
 }

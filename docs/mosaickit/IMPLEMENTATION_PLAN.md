@@ -189,7 +189,7 @@ Each phase ends in a buildable, usable app and is one PR into `develop` of iinaM
   AVFoundation cannot read it, no video track.
 - Cancel-all on termination.
 
-**Status:** in review. Jobs of the same kind run one after the other (a second request queues
+**Status:** done (#3). Jobs of the same kind run one after the other (a second request queues
 behind the first); the experimental File menu command now goes through `MosaicJobCenter`. The
 unit-test target moved to phase 7: adding a test target by hand to `project.pbxproj` is better done
 from Xcode.
@@ -197,6 +197,13 @@ from Xcode.
 ### Phase 2: mosaic of the current video
 - `MosaicMenuBuilder` submenu (Generate Mosaic, plus disabled placeholders for the rest),
   `mosaic-current` command, OSD start/finish/fail, Reveal/Open action per `mosaicOnFinish`.
+
+**Status:** in review. Since the phase 1 service already handled playlists and previews, the
+submenu (`MosaicMenu`, File ▸ Mosaic) enables all four commands at once: mosaic or preview, of the
+current video or of the playlist, plus the `mosaic-current`, `mosaic-playlist`,
+`preview-current` and `preview-playlist` key-binding commands (`MosaicActions`). Results are
+revealed in Finder until the jobs window (phase 5) and the `mosaicOnFinish` setting (phase 6)
+exist. Phase 3 still adds the playlist sidebar context menu; phase 4 adds "Play preview".
 
 ### Phase 3: mosaics for the playlist
 - `mosaic-playlist` command and menu item, playlist sidebar context-menu section, batch via
