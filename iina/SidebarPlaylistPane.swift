@@ -691,6 +691,14 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
         result.addItem(withTitle: NSLocalizedString("pl_menu.show_in_finder", comment: "Show in Finder"), action: #selector(self.contextMenuShowInFinder(_:)))
         result.addItem(NSMenuItem.separator())
       }
+      // iinaMosaic: mosaic and preview of the target rows.
+      MainActor.assumeIsolated {
+        let mosaicItems = MosaicMenu.shared.playlistContextMenuItems(for: rows, of: player)
+        if !mosaicItems.isEmpty {
+          mosaicItems.forEach { result.addItem($0) }
+          result.addItem(NSMenuItem.separator())
+        }
+      }
     }
 
     // menu items from plugins

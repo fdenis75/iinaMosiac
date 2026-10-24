@@ -15,6 +15,8 @@ enum MosaicActions {
   enum Scope {
     case currentFile
     case playlist
+    /// Some rows of the playlist, from the playlist sidebar's context menu.
+    case playlistRows(IndexSet)
   }
 
   /// Whether `player` has something the command can work on: a local file playing, or at least
@@ -27,6 +29,10 @@ enum MosaicActions {
       return player.info.$playlist.withLock { playlist in
         playlist.contains { item in !item.isNetworkResource }
       }
+    case .playlistRows(let rows):
+      return player.info.$playlist.withLock { playlist in
+        rows.contains { $0 < playlist.count && !playlist[$0].isNetworkResource }
+      }
     }
   }
 
@@ -36,9 +42,14 @@ enum MosaicActions {
     switch scope {
     case .currentFile: candidates = MosaicInputResolver.currentFile(of: player)
     case .playlist: candidates = MosaicInputResolver.playlist(of: player)
+    case .playlistRows(let rows): candidates = MosaicInputResolver.playlist(of: player, rows: rows)
     }
     guard !candidates.isEmpty else {
-      player.sendOSD(.custom(scope == .currentFile ? "No video is playing" : "The playlist is empty"))
+      if case .currentFile = scope {
+        player.sendOSD(.custom("No video is playing"))
+      } else {
+        player.sendOSD(.custom("The playlist is empty"))
+      }
       return
     }
 
