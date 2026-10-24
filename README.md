@@ -13,6 +13,14 @@
 </p>
 
 ---
+
+> [!NOTE]
+> **iinaMosaic fork.** This fork adds video mosaics and previews through
+> [MosaicKit](https://github.com/fdenis75/MosaicKit). It requires **macOS 26** and **Xcode 26 or later**
+> (MosaicKit's minimum). Build steps are otherwise unchanged: run `./other/download_libs.sh`, then build
+> `iina.xcodeproj`; Xcode fetches MosaicKit as a Swift package. See [intent.md](intent.md) and
+> [docs/mosaickit/IMPLEMENTATION_PLAN.md](docs/mosaickit/IMPLEMENTATION_PLAN.md).
+
 [![Crowdin](https://badges.crowdin.net/iina/localized.svg)](https://crowdin.com/project/iina)
 ## Features
 

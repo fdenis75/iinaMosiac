@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */; };
+		1A0C05A62F9D000100A1B2C3 /* MosaicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0C05A52F9D000100A1B2C3 /* MosaicKit */; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
 		3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */; };
@@ -534,6 +536,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicDebugAction.swift; sourceTree = "<group>"; };
 		0507C25E2B5617650043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		0507C25F2B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		0507C2622B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
@@ -1838,6 +1841,7 @@
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
 				B4E4470125CE3F930069F06E /* Sparkle in Frameworks */,
+				1A0C05A62F9D000100A1B2C3 /* MosaicKit in Frameworks */,
 				8451E6D92604AEFC009A15D7 /* Just in Frameworks */,
 				5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */,
 				B4E446E825CB53920069F06E /* PromiseKit in Frameworks */,
@@ -1907,6 +1911,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A0C05A32F9D000100A1B2C3 /* Mosaic */ = {
+			isa = PBXGroup;
+			children = (
+				1A0C05A12F9D000100A1B2C3 /* MosaicDebugAction.swift */,
+			);
+			path = Mosaic;
+			sourceTree = "<group>";
+		};
 		49542976216C34950058F680 /* OpenInIINA */ = {
 			isa = PBXGroup;
 			children = (
@@ -2410,6 +2422,7 @@
 				847557121F405F2B0006B0FF /* Menu */,
 				E3A239A62FC6D3F000CE6ACC /* MainWindow */,
 				E3A239AF2FCB4CE800CE6ACC /* Sidebar */,
+				1A0C05A32F9D000100A1B2C3 /* Mosaic */,
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				E360A5CB2C23C181006EA412 /* Settings */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -2638,6 +2651,7 @@
 				B4E446F625CB54EF0069F06E /* Mustache */,
 				B4E4470025CE3F930069F06E /* Sparkle */,
 				8451E6D82604AEFC009A15D7 /* Just */,
+				1A0C05A52F9D000100A1B2C3 /* MosaicKit */,
 			);
 			productName = mpvx;
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
@@ -2759,6 +2773,7 @@
 				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */,
 				B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */,
 				8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */,
+				1A0C05A42F9D000100A1B2C3 /* XCRemoteSwiftPackageReference "MosaicKit" */,
 			);
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
 			projectDirPath = "";
@@ -2906,6 +2921,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A0C05A22F9D000100A1B2C3 /* MosaicDebugAction.swift in Sources */,
 				E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */,
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
@@ -4788,6 +4804,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1A0C05A42F9D000100A1B2C3 /* XCRemoteSwiftPackageReference "MosaicKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fdenis75/MosaicKit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.13.0;
+			};
+		};
 		8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dduan/Just";
@@ -4823,6 +4847,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1A0C05A52F9D000100A1B2C3 /* MosaicKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A0C05A42F9D000100A1B2C3 /* XCRemoteSwiftPackageReference "MosaicKit" */;
+			productName = MosaicKit;
+		};
 		8451E6D82604AEFC009A15D7 /* Just */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */;

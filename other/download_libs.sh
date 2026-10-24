@@ -157,7 +157,10 @@ esac
 SCRIPT_PATH=$(realpath "$0")
 ROOT_PATH=$(dirname "$SCRIPT_PATH")
 
-if [[ $(basename "$ROOT_PATH") != "$PROJECT_NAME" ]]; then
+# iinaMosaic: accept a clone whose folder is not named "iina" (for example "iinaMosiac").
+if [[ -d "$(dirname "$ROOT_PATH")/iina.xcodeproj" ]]; then
+  ROOT_PATH=$(dirname "$ROOT_PATH")
+elif [[ $(basename "$ROOT_PATH") != "$PROJECT_NAME" ]]; then
   while [[ "$ROOT_PATH" != "/" && $(basename "$ROOT_PATH") != "$PROJECT_NAME" ]]; do
     ROOT_PATH=$(dirname "$ROOT_PATH")
   done

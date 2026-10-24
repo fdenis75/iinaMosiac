@@ -230,6 +230,13 @@ class MenuController: NSObject, NSMenuDelegate {
     savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
     showCurrentFileInFinder.action = #selector(MainMenuActionHandler.menuShowCurrentFileInFinder(_:))
     deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
+    // iinaMosaic: phase 0 entry point, replaced by the Mosaic submenu in phase 2.
+    if let fileMenu = showCurrentFileInFinder.menu {
+      let index = fileMenu.index(of: showCurrentFileInFinder)
+      // bindMenuItems() runs on the main thread at launch but is not main-actor isolated.
+      let item = MainActor.assumeIsolated { MosaicDebugAction.shared.makeMenuItem() }
+      fileMenu.insertItem(item, at: index + 1)
+    }
 
     if Preference.bool(for: .enableCmdN) {
       newWindowSeparator.isHidden = false
