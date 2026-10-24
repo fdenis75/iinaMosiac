@@ -234,8 +234,9 @@ class MenuController: NSObject, NSMenuDelegate {
     if let fileMenu = showCurrentFileInFinder.menu {
       let index = fileMenu.index(of: showCurrentFileInFinder)
       // bindMenuItems() runs on the main thread at launch but is not main-actor isolated.
-      let item = MainActor.assumeIsolated { MosaicDebugAction.shared.makeMenuItem() }
-      fileMenu.insertItem(item, at: index + 1)
+      MainActor.assumeIsolated {
+        fileMenu.insertItem(MosaicDebugAction.shared.makeMenuItem(), at: index + 1)
+      }
     }
 
     if Preference.bool(for: .enableCmdN) {

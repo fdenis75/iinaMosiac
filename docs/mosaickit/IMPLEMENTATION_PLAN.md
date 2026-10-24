@@ -170,6 +170,8 @@ are Codable, and it would let iinaMosaic share settings with Tessera.
 Each phase ends in a buildable, usable app and is one PR into `develop` of iinaMosaic.
 
 ### Phase 0: build foundation
+
+**Status:** done (#2), verified on Xcode 27.1 / macOS 26.
 - Raise the deployment target to macOS 26; fix any new deprecation errors this exposes
   (warnings are acceptable; `#available(macOS 12…14)` branches can stay for upstream parity).
 - Add the MosaicKit package (1.13.0, up to next minor) to the `iina` target.
@@ -186,6 +188,11 @@ Each phase ends in a buildable, usable app and is one PR into `develop` of iinaM
 - Preflight with `VideoSource.inspect()`; skip reasons: network resource, file missing,
   AVFoundation cannot read it, no video track.
 - Cancel-all on termination.
+
+**Status:** in review. Jobs of the same kind run one after the other (a second request queues
+behind the first); the experimental File menu command now goes through `MosaicJobCenter`. The
+unit-test target moved to phase 7: adding a test target by hand to `project.pbxproj` is better done
+from Xcode.
 
 ### Phase 2: mosaic of the current video
 - `MosaicMenuBuilder` submenu (Generate Mosaic, plus disabled placeholders for the rest),
@@ -233,7 +240,7 @@ Each phase ends in a buildable, usable app and is one PR into `develop` of iinaM
 
 There is no test target in IINA today. Plan:
 
-- **Unit tests (added in phase 1 as a small `iinaMosaicTests` target):** `MosaicSettings` mapping
+- **Unit tests (a small `iinaMosaicTests` target, created in Xcode in phase 7):** `MosaicSettings` mapping
   (each preference → config field, pinned values), and `MosaicInputResolver` filtering with a fake
   playlist (network items, duplicates, missing files).
 - **Manual QA matrix (phase 7):**

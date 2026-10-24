@@ -508,6 +508,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // Disable all remote media commands. This also removes IINA from the Now Playing widget.
     RemoteCommandController.shared.disable()
 
+    // iinaMosaic: stop mosaic and preview generation. MosaicKit leaves no partial files.
+    MainActor.assumeIsolated { MosaicJobCenter.shared.cancelAll() }
+
     // The first priority was to shutdown any new input from the user. The second priority is to
     // send a logout request if logged into an online subtitles provider as that needs time to
     // complete.
@@ -559,6 +562,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("Waiting for saving of playback history to complete")
     }
 
+    // iinaMosaic: wait for the cancelled mosaic and preview work to stop and clean up.
+    if MainActor.assumeIsolated({ MosaicJobCenter.shared.hasOutstandingTasks }) {
+      canTerminateNow = false
+      Logger.log("Waiting for mosaic generation to stop")
+    }
+
     // If the user pressed Q and mpv initiated the termination then players will already be
     // shutdown and it may be possible to proceed with termination.
     if canTerminateNow {
@@ -597,6 +606,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         // shutdown code.
         Logger.log("Timed out waiting for log out of online subtitles provider to complete",
                    level: .warning)
+      }
+      if MainActor.assumeIsolated({ MosaicJobCenter.shared.hasOutstandingTasks }) {
+        // iinaMosaic
+        Logger.log("Timed out waiting for mosaic generation to stop", level: .warning)
       }
       Logger.log("Proceeding with application termination due to time out", level: .warning)
       // Tell Cocoa to proceed with termination.
@@ -652,6 +665,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       guard !OnlineSubtitle.loggedIn else { return }
       // If still still saving playback history then continue waiting.
       guard HistoryController.shared.tasksOutstanding == 0 else { return }
+      // iinaMosaic: if mosaic generation has not stopped yet then continue waiting.
+      guard !MainActor.assumeIsolated({ MosaicJobCenter.shared.hasOutstandingTasks }) else { return }
       // All players have shutdown. No longer logged into an online subtitles provider and saving of
       // playback history has finished.
       Logger.log("Proceeding with application termination")
@@ -718,6 +733,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       // If there are still tasks outstanding then must continue waiting.
       guard HistoryController.shared.tasksOutstanding == 0 else { return }
       Logger.log("Saving of playback history finished")
+      proceedWithTermination()
+    }
+    observers.append(observer)
+
+    // iinaMosaic: establish an observer for mosaic and preview generation stopping.
+    observer = center.addObserver(forName: MosaicJobCenter.allTasksFinishedNotification, object: nil,
+                                  queue: .main) { _ in
+      guard !self.timedOut else {
+        Logger.log("Mosaic generation stopped after application termination timed out", level: .warning)
+        return
+      }
+      Logger.log("Mosaic generation stopped")
       proceedWithTermination()
     }
     observers.append(observer)
